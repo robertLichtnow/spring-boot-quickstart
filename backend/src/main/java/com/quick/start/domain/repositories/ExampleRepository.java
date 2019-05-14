@@ -20,7 +20,7 @@ public interface ExampleRepository extends JpaRepository<Example, Long> {
      * @param pageable next page
      * @return Paginated list of examples
      */
-    @Query("SELECT e FROM Example e WHERE (:name IS NULL OR e.name LIKE CONCAT('%',:name,'%'))")
+    @Query("SELECT e FROM Example e WHERE (:name IS NULL OR LOWER(e.name) LIKE LOWER(CONCAT('%',:name,'%')))")
     public Page<Example> searchExamples(@Param("name") String name, Pageable pageable);
 
 }
