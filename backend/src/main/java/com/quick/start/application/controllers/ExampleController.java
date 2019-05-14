@@ -21,7 +21,7 @@ public class ExampleController {
     @Autowired
     private ExampleService exampleService;
 
-    @RequestMapping(method = { RequestMethod.GET })
+    @RequestMapping(path = "/search",method = { RequestMethod.GET })
     public Page<Example> searchExample(@RequestParam String name, Pageable pageable) {
         return this.exampleService.searchExample(name, pageable);
     }
