@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <dataset>
-    <teste
+    <example
 		id="50"
-		nome="Teste"
+		name="Test"
     />
 
-    <teste
+    <example
 		id="51"
-		nome="Teste 2"
+		name="Test 2"
     />
 
-    <teste
+    <example
 		id="52"
-		nome="Teste 3"
+		name="Test 3"
     />
 </dataset>
