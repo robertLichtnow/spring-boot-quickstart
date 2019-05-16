@@ -17,6 +17,12 @@ public class ExampleService {
     @Autowired
     private ExampleRepository exampleRepository;
 
+    /**
+     * Method for searching examples
+     * @param name the name to be searched
+     * @param pageable the pageable object for pagination
+     * @return the page containing the examples filtered by the name
+     */
     public Page<Example> searchExample(String name, Pageable pageable) {
         return this.exampleRepository.searchExamples(name, pageable);
     }
