@@ -13,13 +13,6 @@ import org.springframework.data.repository.query.Param;
  */
 public interface ExampleRepository extends JpaRepository<Example, Long> {
 
-    /**
-     * Example repository interface for search with paging
-     * 
-     * @param name     name to be searched
-     * @param pageable next page
-     * @return Paginated list of examples
-     */
     @Query("SELECT e FROM Example e WHERE (:name IS NULL OR LOWER(e.name) LIKE LOWER(CONCAT('%',:name,'%')))")
     public Page<Example> searchExamples(@Param("name") String name, Pageable pageable);
 
