@@ -7,6 +7,7 @@ import com.quick.start.AbstractControllerTest;
 import com.quick.start.domain.entities.Example;
 
 import static org.hamcrest.Matchers.*;
+import static org.junit.Assert.assertNotNull;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
@@ -96,7 +97,32 @@ public class ExampleCtrlTest extends AbstractControllerTest{
             .andDo(print())
             .andExpect(status().isOk())
             .andExpect(jsonPath("$.name", equalTo("Test 27")));
-
     }
-    
+
+    @Test
+    public void testRemoveExample() throws Exception{
+        Example example = new Example();
+
+        // Create new example to delete
+        example.setName("Test 42");
+        MvcResult result = this.mockMvc.perform(post("/api/example")
+            .contentType(MediaType.APPLICATION_JSON)
+            .content(convertToJson(example)))
+            .andExpect(status().isOk())
+            .andReturn();
+
+        example = convertFromJson(result.getResponse().getContentAsString(), Example.class);
+        
+        // Verifying that it did create
+        assertNotNull(example);
+
+        // Trying to delete
+        this.mockMvc.perform(delete("/api/example/{id}", example.getId()))
+            .andExpect(status().isOk());
+        
+        // Trying to retrieve a deleted registry
+        this.mockMvc.perform(get("/api/example/{id}", example.getId()))
+            .andDo(print())
+            .andExpect(status().isNotFound());
+    }    
 }
