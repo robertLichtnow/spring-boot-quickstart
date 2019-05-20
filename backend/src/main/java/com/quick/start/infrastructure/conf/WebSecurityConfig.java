@@ -17,6 +17,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
+        // This must be change to fill your needs, please, don't keep it like this,
+        // otherwise you're gonna have trouble with csrf attacks for 
+        // state mutation
         http.cors();
         http.csrf().disable();
     }
